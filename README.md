@@ -1,5 +1,5 @@
 
-# CMR Report Builder (Streamlit) — v2
+# CMR Report Builder (Streamlit) — v4.2
 
 - Parser robusto per **export CVI** come nel file di esempio
 - Inserimento automatico **valori paziente** + **v.n.** (sesso/età)
