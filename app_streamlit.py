@@ -235,7 +235,7 @@ VENTRICOLO SINISTRO dimensionalmente nei limiti di norma (volume telediastolico:
 Massa miocardica nei limiti ({pv('LVmass')}, v.n. {N(sex, age, 'LVmass')} g*; massa indicizzata {pv('LVmassbsa')}, v.n. {N(sex, age, 'LVmassbsa')} g/m^2*), con normali spessori parietali (spessore telediastolico massimo in corrispondenza del setto interventricolare inferiore basale: mm).
 Normale cinesi globale e segmentaria, con frazione d’eiezione conservata (FE {pv('LVEF')} %, v.n.  {N(sex, age, 'LVEF')}%*).
 Non aree di edema focale nelle sequenze STIR.
-Nei limiti i tempi di rilassamento T1 nativo (media globale: {pv('T1_native')}, v.n. {t1_norm}) e T2 (media globale: {pv('T2')}; v.n. 50 ms; valori borderline 53 ms) e la frazione di volume extracellulare (ECV) (media globale: {pv('ECV')}, v.n. 27%).
+Nei limiti i tempi di rilassamento T1 nativo (media globale: {pv('T1_native')}, v.n. {t1_norm}) e T2 (media globale: {pv('T2')}; v.n. 50 ms; valori borderline 53 ms) e la frazione di volume extracellulare (ECV) (media globale: {pv('ECV')}%, v.n. 27%).
 Non significative cicatrici miocardiche nelle sequenze di LGE.
 Non evidenti difetti funzionali delle valvole mitralica e aortica.
 
