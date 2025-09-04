@@ -231,20 +231,20 @@ Esame eseguito su scanner {scanner}.
 Esame eseguito con sequenze morfologiche (STIR), sequenze cine multiplanari, mapping T1 e T2, studio di perfusione miocardica in condizioni di riposo e studio di late gadolinium enhancement (LGE). Durante l’esame è stato iniettato mezzo di contrasto paramagnetico (gadobutrolo) per via endovenosa.
 
 REFERTO
-VENTRICOLO SINISTRO dimensionalmente nei limiti di norma (volume telediastolico: {pv('LVedv')} mL, v.n. {N(sex, age, 'LVedv')} mL*; volume telediastolico indicizzato: {pv('LVedvbsa')} mL/m2, v.n. {N(sex, age, 'LVedvbsa')} mL/m2*), di normale morfologia.
-Massa miocardica nei limiti ({pv('LVmass')} g, v.n. {N(sex, age, 'LVmass')} g*; massa indicizzata {pv('LVmassbsa')} g/m2, v.n. {N(sex, age, 'LVmassbsa')} g/m2*), con normali spessori parietali (spessore telediastolico massimo in corrispondenza del setto interventricolare inferiore basale: mm).
+VENTRICOLO SINISTRO dimensionalmente nei limiti di norma (volume telediastolico: {pv('LVedv')}, v.n. {N(sex, age, 'LVedv')} mL*; volume telediastolico indicizzato: {pv('LVedvbsa')}, v.n. {N(sex, age, 'LVedvbsa')} mL/m^2*), di normale morfologia.
+Massa miocardica nei limiti ({pv('LVmass')}, v.n. {N(sex, age, 'LVmass')} g*; massa indicizzata {pv('LVmassbsa')}, v.n. {N(sex, age, 'LVmassbsa')} g/m^2*), con normali spessori parietali (spessore telediastolico massimo in corrispondenza del setto interventricolare inferiore basale: mm).
 Normale cinesi globale e segmentaria, con frazione d’eiezione conservata (FE {pv('LVEF')} %, v.n.  {N(sex, age, 'LVEF')}%*).
 Non aree di edema focale nelle sequenze STIR.
-Nei limiti i tempi di rilassamento T1 nativo (media globale: {pv('T1_native')} ms, v.n. {t1_norm}) e T2 (media globale: {pv('T2')} ms; v.n. 50 ms; valori borderline 53 ms) e la frazione di volume extracellulare (ECV) (media globale: {pv('ECV')} %, v.n. 27%).
+Nei limiti i tempi di rilassamento T1 nativo (media globale: {pv('T1_native')}, v.n. {t1_norm}) e T2 (media globale: {pv('T2')}; v.n. 50 ms; valori borderline 53 ms) e la frazione di volume extracellulare (ECV) (media globale: {pv('ECV')}, v.n. 27%).
 Non significative cicatrici miocardiche nelle sequenze di LGE.
 Non evidenti difetti funzionali delle valvole mitralica e aortica.
 
-VENTRICOLO DESTRO dimensionalmente nei limiti di norma (volume telediastolico: {pv('RVedv')} mL, v.n. {N(sex, age, 'RVedv')} mL*; volume telediastolico indicizzato: {pv('RVedvbsa')} mL/m2, v.n. {N(sex, age, 'RVedvbsa')} mL/m2*).
-Nei limiti spessore e intensità di segnale della parete libera, che presenta normale contrattilità con conservata frazione di eiezione (FE {pv('RVEF')} %, v.n. {N(sex, age, 'RVEF')}%*).
+VENTRICOLO DESTRO dimensionalmente nei limiti di norma (volume telediastolico: {pv('RVedv')}, v.n. {N(sex, age, 'RVedv')} mL*; volume telediastolico indicizzato: {pv('RVedvbsa')}, v.n. {N(sex, age, 'RVedvbsa')} mL/m^2*).
+Nei limiti spessore e intensità di segnale della parete libera, che presenta normale contrattilità con conservata frazione di eiezione (FE {pv('RVEF')}, v.n. {N(sex, age, 'RVEF')}%*).
 
 Atri non dilatati.
-Atrio sinistro: volume telesistolico {pv('LA')} mL (v.n. {N(sex, age, 'LA')} mL); volume telesistolico indicizzato {pv('LAbsa')} mL/m2 (v.n. {N(sex, age, 'LAbsa')} mL/m2*).
-Atrio destro: volume telesistolico {pv('RA')} mL (v.n. {N(sex, age, 'RA')} mL); volume telesistolico indicizzato {pv('RAbsa')} mL/m2 (v.n. {N(sex, age, 'RAbsa')} mL/m2*).
+Atrio sinistro: volume telesistolico {pv('LA')} (v.n. {N(sex, age, 'LA')} mL); volume telesistolico indicizzato {pv('LAbsa')} (v.n. {N(sex, age, 'LAbsa')} mL/m^2*).
+Atrio destro: volume telesistolico {pv('RA')} mL (v.n. {N(sex, age, 'RA')} mL); volume telesistolico indicizzato {pv('RAbsa')} (v.n. {N(sex, age, 'RAbsa')} mL/m^2*).
 
 Non versamento pericardico.
 Non ispessimento dei foglietti pericardici.
