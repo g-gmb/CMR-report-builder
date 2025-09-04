@@ -270,7 +270,7 @@ st.title("CMR Report Builder v4.2")
 with st.container():
     _, col_calc = st.columns([3,1])  # box a destra
     with col_calc:
-        st.markdown("### 🧮 Ematocrito sintetico")
+        st.markdown("### Ematocrito sintetico")
         t1_val = st.number_input("T1 nativo (ms)", min_value=1, value=1000, step=1)
         field3t_calc = st.toggle("Scanner 3T", value=False)
 
@@ -296,14 +296,9 @@ with col3:
 with col4:
     include_tables = st.checkbox("Includi tabella LV/RV a fine referto", value=True)
 
-uploaded = st.file_uploader("Carica file TXT", type=["txt"])
 text_input = st.text_area("...oppure incolla qui il testo", height=260)
 
-if uploaded or text_input.strip():
-    if uploaded:
-        text = uploaded.read().decode("utf-8", errors="ignore")
-    else:
-        text = text_input
+text = text_input
 
     pvals, lv_df, rv_df = extract_patient_values(text)
     report_text = build_report_text(sex, int(age), field3t, pvals, lv_df, rv_df, include_tables)
