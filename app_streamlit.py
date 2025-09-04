@@ -240,7 +240,7 @@ Non significative cicatrici miocardiche nelle sequenze di LGE.
 Non evidenti difetti funzionali delle valvole mitralica e aortica.
 
 VENTRICOLO DESTRO dimensionalmente nei limiti di norma (volume telediastolico: {pv('RVedv')}, v.n. {N(sex, age, 'RVedv')} mL*; volume telediastolico indicizzato: {pv('RVedvbsa')}, v.n. {N(sex, age, 'RVedvbsa')} mL/m^2*).
-Nei limiti spessore e intensità di segnale della parete libera, che presenta normale contrattilità con conservata frazione di eiezione (FE {pv('RVEF')}, v.n. {N(sex, age, 'RVEF')}%*).
+Nei limiti spessore e intensità di segnale della parete libera, che presenta normale contrattilità con conservata frazione di eiezione (FE {pv('RVEF')}%, v.n. {N(sex, age, 'RVEF')}%*).
 
 Atri non dilatati.
 Atrio sinistro: volume telesistolico {pv('LA')} (v.n. {N(sex, age, 'LA')} mL); volume telesistolico indicizzato {pv('LAbsa')} (v.n. {N(sex, age, 'LAbsa')} mL/m^2*).
