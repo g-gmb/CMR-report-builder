@@ -304,43 +304,43 @@ pvals, lv_df, rv_df = extract_patient_values(text)
 report_text = build_report_text(sex, int(age), field3t, pvals, lv_df, rv_df, include_tables)
 report_text_unicode = report_text.replace("^2", "²")
 
-    st.subheader("Referto")
-    st.text(report_text_unicode)
+        st.subheader("Referto")
+st.text(report_text_unicode)
 
-    st.write("")
-    st.caption("Copia rapida del referto:")
-    txt_id = "report_" + str(uuid.uuid4()).replace("-", "")
-    from streamlit.components.v1 import html
-    html(f"""
-        <div>
-            <button id="btn_{txt_id}" style="padding:8px 12px; font-weight:600;">Copia il referto</button>
-            <pre id="{txt_id}" style="position:absolute; left:-9999px; white-space:pre-wrap;">{report_text_unicode}</pre>
-        </div>
-        <script>
-            const btn = document.getElementById("btn_{txt_id}");
-            const pre = document.getElementById("{txt_id}");
-            btn.addEventListener("click", async () => {{
-            try {{
-                await navigator.clipboard.writeText(pre.innerText);
-                btn.innerText = "Copiato!";
-                setTimeout(()=>btn.innerText="Copia il referto", 1500);
-            }} catch (e) {{
-                const range = document.createRange();
-                range.selectNode(pre);
-                const sel = window.getSelection();
-                sel.removeAllRanges();
-                sel.addRange(range);
-                document.execCommand("copy");
-                sel.removeAllRanges();
-                btn.innerText = "Copiato!";
-                setTimeout(()=>btn.innerText="Copia il referto", 1500);
-            }}
-         }});
-        </script>
-    """, height=60)
+st.write("")
+st.caption("Copia rapida del referto:")
+txt_id = "report_" + str(uuid.uuid4()).replace("-", "")
+from streamlit.components.v1 import html
+html(f"""
+    <div>
+        <button id="btn_{txt_id}" style="padding:8px 12px; font-weight:600;">Copia il referto</button>
+        <pre id="{txt_id}" style="position:absolute; left:-9999px; white-space:pre-wrap;">{report_text_unicode}</pre>
+    </div>
+    <script>
+        const btn = document.getElementById("btn_{txt_id}");
+        const pre = document.getElementById("{txt_id}");
+        btn.addEventListener("click", async () => {{
+        try {{
+            await navigator.clipboard.writeText(pre.innerText);
+            btn.innerText = "Copiato!";
+            setTimeout(()=>btn.innerText="Copia il referto", 1500);
+        }} catch (e) {{
+            const range = document.createRange();
+            range.selectNode(pre);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            document.execCommand("copy");
+            sel.removeAllRanges();
+            btn.innerText = "Copiato!";
+            setTimeout(()=>btn.innerText="Copia il referto", 1500);
+        }}
+     }});
+    </script>
+""", height=60)
 
 
-    with st.expander("Valori paziente estratti (debug)"):
-        st.json(pvals, expanded=False)
+with st.expander("Valori paziente estratti (debug)"):
+    st.json(pvals, expanded=False)
 else:
-    st.info("Carica o incolla un testo per generare il referto.")
+st.info("Carica o incolla un testo per generare il referto.")
