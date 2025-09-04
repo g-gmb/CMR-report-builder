@@ -266,6 +266,26 @@ TABELLA PARAMETRI VOLUMETRICO-FUNZIONALI VENTRICOLO SINISTRO E VENTRICOLO DESTRO
 
 st.title("CMR Report Builder v4.2")
 
+# Box ematocrito sintetico in alto a destra
+with st.container():
+    _, col_calc = st.columns([3,1])  # box a destra
+    with col_calc:
+        st.markdown("### 🧮 Ematocrito sintetico")
+        t1_val = st.number_input("T1 nativo (ms)", min_value=1, value=1000, step=1)
+        field3t_calc = st.toggle("Scanner 3T", value=False)
+
+        if t1_val > 0:
+            if field3t_calc:
+                # Formula 3T
+                hct = (869.7 / t1_val) - 0.071
+            else:
+                # Formula 1.5T
+                hct = (866 / t1_val) - 0.1232
+
+            st.metric("Ematocrito sintetico", f"{hct:.2f}")
+        else:
+            st.info("Inserisci un T1 valido per calcolare l'ematocrito")
+
 col1, col2, col3, col4 = st.columns([1,1,1,1])
 with col1:
     sex = st.selectbox("Sesso", ["M", "F"], index=0, help="M = maschio, F = femmina")
