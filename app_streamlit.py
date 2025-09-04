@@ -304,7 +304,7 @@ pvals, lv_df, rv_df = extract_patient_values(text)
 report_text = build_report_text(sex, int(age), field3t, pvals, lv_df, rv_df, include_tables)
 report_text_unicode = report_text.replace("^2", "²")
 
-        st.subheader("Referto")
+st.subheader("Referto")
 st.text(report_text_unicode)
 
 st.write("")
