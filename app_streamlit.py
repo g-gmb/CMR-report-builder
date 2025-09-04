@@ -340,7 +340,7 @@ html(f"""
 """, height=60)
 
 
-    with st.expander("Valori paziente estratti (debug)"):
+with st.expander("Valori paziente estratti (debug)"):
         st.json(pvals, expanded=False)
 else:
     st.info("Carica o incolla un testo per generare il referto.")
