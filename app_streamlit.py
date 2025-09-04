@@ -298,8 +298,8 @@ with col4:
 
 text_input = st.text_area("...oppure incolla qui il testo", height=260)
 
-text = text_input
-
+    text = text_input
+    
     pvals, lv_df, rv_df = extract_patient_values(text)
     report_text = build_report_text(sex, int(age), field3t, pvals, lv_df, rv_df, include_tables)
     report_text_unicode = report_text.replace("^2", "²")
