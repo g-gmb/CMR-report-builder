@@ -287,9 +287,10 @@ if uploaded or text_input.strip():
 
     pvals, lv_df, rv_df = extract_patient_values(text)
     report_text = build_report_text(sex, int(age), field3t, pvals, lv_df, rv_df, include_tables)
+    report_text_unicode = report_text.replace("^2", "²")
 
     st.subheader("Referto")
-    st.text(report_text)
+    st.text(report_text_unicode)
 
     st.write("")
     st.caption("Copia rapida del referto:")
@@ -298,7 +299,7 @@ if uploaded or text_input.strip():
     html(f"""
         <div>
             <button id="btn_{txt_id}" style="padding:8px 12px; font-weight:600;">Copia il referto</button>
-            <pre id="{txt_id}" style="position:absolute; left:-9999px; white-space:pre-wrap;">{report_text}</pre>
+            <pre id="{txt_id}" style="position:absolute; left:-9999px; white-space:pre-wrap;">{report_text_unicode}</pre>
         </div>
         <script>
             const btn = document.getElementById("btn_{txt_id}");
