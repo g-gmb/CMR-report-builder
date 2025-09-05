@@ -244,7 +244,7 @@ Nei limiti spessore e intensità di segnale della parete libera, che presenta no
 
 Atri non dilatati.
 Atrio sinistro: volume telesistolico {pv('LA')} (v.n. {N(sex, age, 'LA')} mL); volume telesistolico indicizzato {pv('LAbsa')} (v.n. {N(sex, age, 'LAbsa')} mL/m^2*).
-Atrio destro: volume telesistolico {pv('RA')} mL (v.n. {N(sex, age, 'RA')} mL); volume telesistolico indicizzato {pv('RAbsa')} (v.n. {N(sex, age, 'RAbsa')} mL/m^2*).
+Atrio destro: volume telesistolico {pv('RA')} (v.n. {N(sex, age, 'RA')} mL); volume telesistolico indicizzato {pv('RAbsa')} (v.n. {N(sex, age, 'RAbsa')} mL/m^2*).
 
 Non versamento pericardico.
 Non ispessimento dei foglietti pericardici.
@@ -264,7 +264,7 @@ TABELLA PARAMETRI VOLUMETRICO-FUNZIONALI VENTRICOLO SINISTRO E VENTRICOLO DESTRO
         base = base + "\n" + lv_txt + "\n" + rv_txt
     return base
 
-st.title("CMR Report Builder v4.2")
+st.title("CMR Report Builder v5")
 
 col1, col2, col3, col4 = st.columns([1,1,1,1])
 with col1:
@@ -272,60 +272,79 @@ with col1:
 with col2:
     age = st.number_input("Età", min_value=0, max_value=110, value=18, step=1)
 with col3:
-    field3t = st.checkbox("Scanner 3T (Philips 7700)", value=False, help="Se non spuntato → 1,5T")
+    st.empty()
 with col4:
-    include_tables = st.checkbox("Includi tabella LV/RV a fine referto", value=True)
+    st.empty()
 
-uploaded = st.file_uploader("Carica file TXT", type=["txt"])
-text_input = st.text_area("...oppure incolla qui il testo", height=260)
+# Sezione input con box ematocrito + textarea testo
+col_left, col_right = st.columns([3,1])  # 1/3 della pagina per ematocrito, 2/3 per il testo
 
-if uploaded or text_input.strip():
-    if uploaded:
-        text = uploaded.read().decode("utf-8", errors="ignore")
+with col_right:
+    st.markdown("### Ematocrito sintetico")
+    t1_val = st.number_input("T1 nativo blood pool (ms)", min_value=1, value=1600, step=1)
+    field3t_calc = st.toggle("Scanner 3T", value=False)
+
+    if t1_val > 0:
+        if field3t_calc:
+            hct = (869.7 / t1_val) - 0.071
+        else:
+            hct = (866 / t1_val) - 0.1232
+
+        hct_pct = hct * 100
+
+        st.metric("Ematocrito", f"{hct_pct:.1f}%")
     else:
-        text = text_input
+        st.info("Inserisci un T1 valido")
 
-    pvals, lv_df, rv_df = extract_patient_values(text)
-    report_text = build_report_text(sex, int(age), field3t, pvals, lv_df, rv_df, include_tables)
-    report_text_unicode = report_text.replace("^2", "²")
+with col_left:
+    text = st.text_area("Incolla qui il testo", height=300)
 
-    st.subheader("Referto")
-    st.text(report_text_unicode)
+col1, col2, col3, col4 = st.columns([1,1,1,1])
+with col1:
+    field3t = st.checkbox("Scanner 3T (Philips 7700)", value=False, help="Se non spuntato → 1,5T")
+with col2:
+    include_tables = st.checkbox("Includi tabella LV/RV a fine referto", value=True)
+with col3:
+    st.empty()
+with col4:
+    st.empty()
 
-    st.write("")
-    st.caption("Copia rapida del referto:")
-    txt_id = "report_" + str(uuid.uuid4()).replace("-", "")
-    from streamlit.components.v1 import html
-    html(f"""
-        <div>
-            <button id="btn_{txt_id}" style="padding:8px 12px; font-weight:600;">Copia il referto</button>
-            <pre id="{txt_id}" style="position:absolute; left:-9999px; white-space:pre-wrap;">{report_text_unicode}</pre>
-        </div>
-        <script>
-            const btn = document.getElementById("btn_{txt_id}");
-            const pre = document.getElementById("{txt_id}");
-            btn.addEventListener("click", async () => {{
-            try {{
-                await navigator.clipboard.writeText(pre.innerText);
-                btn.innerText = "Copiato!";
-                setTimeout(()=>btn.innerText="Copia il referto", 1500);
-            }} catch (e) {{
-                const range = document.createRange();
-                range.selectNode(pre);
-                const sel = window.getSelection();
-                sel.removeAllRanges();
-                sel.addRange(range);
-                document.execCommand("copy");
-                sel.removeAllRanges();
-                btn.innerText = "Copiato!";
-                setTimeout(()=>btn.innerText="Copia il referto", 1500);
-            }}
-         }});
-        </script>
-    """, height=60)
+pvals, lv_df, rv_df = extract_patient_values(text)
+report_text = build_report_text(sex, int(age), field3t, pvals, lv_df, rv_df, include_tables)
+report_text_unicode = report_text.replace("^2", "²")
 
+st.subheader("Referto")
+st.text(report_text_unicode)
 
-    with st.expander("Valori paziente estratti (debug)"):
-        st.json(pvals, expanded=False)
-else:
-    st.info("Carica o incolla un testo per generare il referto.")
+st.write("")
+st.caption("Copia rapida del referto:")
+txt_id = "report_" + str(uuid.uuid4()).replace("-", "")
+from streamlit.components.v1 import html
+html(f"""
+    <div>
+        <button id="btn_{txt_id}" style="padding:8px 12px; font-weight:600;">Copia il referto</button>
+        <pre id="{txt_id}" style="position:absolute; left:-9999px; white-space:pre-wrap;">{report_text_unicode}</pre>
+    </div>
+    <script>
+        const btn = document.getElementById("btn_{txt_id}");
+        const pre = document.getElementById("{txt_id}");
+        btn.addEventListener("click", async () => {{
+        try {{
+            await navigator.clipboard.writeText(pre.innerText);
+            btn.innerText = "Copiato!";
+            setTimeout(()=>btn.innerText="Copia il referto", 1500);
+        }} catch (e) {{
+            const range = document.createRange();
+            range.selectNode(pre);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            document.execCommand("copy");
+            sel.removeAllRanges();
+            btn.innerText = "Copiato!";
+            setTimeout(()=>btn.innerText="Copia il referto", 1500);
+        }}
+        }});
+    </script>
+""", height=60)
+
