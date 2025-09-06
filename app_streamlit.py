@@ -6,8 +6,7 @@ from pathlib import Path
 from normal_utils import load_normals, pick_age_column, get_normal_value
 import uuid
 
-st.page(icon="🧲")
-st.set_page_config(page_title="CMR Report Builder", layout="wide")
+st.set_page_config(page_title="CMR Report Builder", layout="wide", page_icon="🧲")
 
 def split_cols(ln: str):
     ln = ln.replace("\t", " ").strip()
