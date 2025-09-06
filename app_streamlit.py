@@ -264,7 +264,7 @@ TABELLA PARAMETRI VOLUMETRICO-FUNZIONALI VENTRICOLO SINISTRO E VENTRICOLO DESTRO
         base = base + "\n" + lv_txt + "\n" + rv_txt
     return base
 
-st.title("CMR Report Builder v5")
+st.title("CMR Report Builder 🫀 v5")
 
 col1, col2, col3, col4 = st.columns([1,1,1,1])
 with col1:
@@ -348,3 +348,6 @@ html(f"""
     </script>
 """, height=60)
 
+
+# --- Copyright --------------------------------------------------------------
+st.markdown("<div style='text-align: right; font-size: small; color: gray;'>© Gioele Gambato</div>", unsafe_allow_html=True)
