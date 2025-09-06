@@ -1,4 +1,3 @@
-
 import os
 import pandas as pd
 from typing import Dict
@@ -6,23 +5,36 @@ from typing import Dict
 AGE_COLUMNS = ["18- 29", "30- 39", "40- 49", "50- 59", "60- 69", "70+"]
 
 def _load_table(path: str) -> pd.DataFrame:
-    df = pd.read_csv(path, dtype=str).fillna('')
-    header = df.iloc[0].tolist()
-    df.columns = header
-    df = df.iloc[1:].reset_index(drop=True)
+    # Read with existing header row
+    df = pd.read_csv(path, dtype=str, header=0)
+
+    # Normalize column names (handle non-breaking spaces and en dashes)
+    df.columns = [c.replace('\xa0', ' ').replace('–', '-').strip() for c in df.columns]
+
+    # Ensure a 'Variable' column exists
     if "Variable" not in df.columns:
-        first = header[0]
-        df = df.rename(columns={first: "Variable"})
-    df["Variable"] = df["Variable"].astype(str).str.strip()
-    for c in AGE_COLUMNS:
-        if c in df.columns:
-            df[c] = df[c].astype(str).str.strip()
+        df = df.rename(columns={df.columns[0]: "Variable"})
+
+    # Strip string cells and replace NaNs with ''
+    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x).fillna('')
+
+    # Optional: sanity check columns
+    missing = [c for c in AGE_COLUMNS if c not in df.columns]
+    if missing:
+        raise ValueError(f"Missing age columns: {missing}. Found: {list(df.columns)}")
+
     return df
 
 def _is_section_row(row: pd.Series) -> bool:
-    if not str(row.get("Variable", "")).strip():
+    var = str(row.get("Variable", "")).strip()
+    if not var:
         return False
-    vals = [str(row.get(c, "")).strip() for c in AGE_COLUMNS if c in row.index]
+    vals = []
+    for c in AGE_COLUMNS:
+        if c in row.index:
+            v = row[c]
+            v = "" if (pd.isna(v) or str(v).strip().lower() == "nan") else str(v).strip()
+            vals.append(v)
     return all(v == "" for v in vals)
 
 def _split_sections(df: pd.DataFrame):
