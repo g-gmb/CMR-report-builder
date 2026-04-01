@@ -16,7 +16,7 @@ def _load_table(path: str) -> pd.DataFrame:
         df = df.rename(columns={df.columns[0]: "Variable"})
 
     # Strip string cells and replace NaNs with ''
-    df = df.applymap(lambda x: x.strip() if isinstance(x, str) else x).fillna('')
+    df = df.map(lambda x: x.strip() if isinstance(x, str) else x).fillna('')
 
     # Optional: sanity check columns
     missing = [c for c in AGE_COLUMNS if c not in df.columns]
