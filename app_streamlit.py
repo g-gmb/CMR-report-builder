@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import re, json
@@ -265,6 +264,18 @@ TABELLA PARAMETRI VOLUMETRICO-FUNZIONALI VENTRICOLO SINISTRO E VENTRICOLO DESTRO
     return base
 
 st.title("CMR Report Builder 🫀 v5")
+
+st.markdown(
+    """
+    <div style='text-align: center; background-color: #fff3cd; border: 2px solid #ffc107; border-radius: 12px; padding: 22px; margin: 12px 0 28px 0;'>
+        <div style='font-size: 1.7em; font-weight: 700; color: #856404;'>⚠️ Questo sito si sposterà definitivamente su:</div>
+        <div style='font-size: 1.45em; font-weight: 700; margin-top: 10px;'>
+            <a href='https://cmr-report-builder.up.railway.app' target='_blank' style='color: #0b5394; text-decoration: none;'>https://cmr-report-builder.up.railway.app</a>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 col1, col2, col3, col4 = st.columns([1,1,1,1])
 with col1:
